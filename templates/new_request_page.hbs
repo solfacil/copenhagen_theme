@@ -1,24 +1,100 @@
-<div class="container-divider"></div>
-<div class="container">
-  <nav class="sub-nav">
-    {{breadcrumbs}}
-    <div class="search-container">
-      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-icon" aria-hidden="true">
-        <circle cx="4.5" cy="4.5" r="4" fill="none" stroke="currentColor"/>
-        <path stroke="currentColor" stroke-linecap="round" d="M11 11L7.5 7.5"/>
-      </svg>
-      {{search submit=false}}
-    </div>
-  </nav>
-
-  <h1>
-    {{t 'submit_a_request'}}
-    <span class="follow-up-hint">
-      {{follow_up}}
-    </span>
-  </h1>
-
-  <div id="main-content" class="form">
-    {{request_form wysiwyg=true}}
+{{#if signed_in}}
+<section class='sm'>
+  <div class="request-breadcrumbs">{{breadcrumbs}}</div>
+  <div class='form-title-text'>
+    <h1>Abrir chamado</h1>
+    <h3>Envie-nos sua solicitação preenchendo os campos abaixo, e logo retornaremos o
+      seu contato.</h3>
   </div>
-</div>
+  {{request_form wysiwyg=true}}
+</section>
+{{/if}}
+ <section>
+    <div class='form-title'>
+		<h2>Não encontrou o que procurava? Entre em contato pelo nosso WhatsApp</h2>
+  </div>
+  <div class="categories-cards">
+    <ul>
+        <li class="categories-cards__card flex-start">
+          <a>
+            <div class="categories-cards__content">
+              <img
+                src="{{asset "category13819539135643" suffix=".svg"}}"
+                class="categories-cards__image"
+              />
+              <div>
+                <div class='card-service-channels__header'>
+                	<p>WhatsApp</p>
+              	</div>
+              	<h3 class='light'>Para integradores</h3>
+              </div>
+            </div>
+            <a id="partner" class='card-called__button light categories-cards__fullwith'>
+              <div class="categories-card_wpp-span">
+                <img
+                src="{{asset "whatsapp" suffix=".svg"}}"
+                class="categories-card_wpp-icon"
+              />
+              <span>{{settings.partner_hub_wpp}}</span>
+              </div>
+            </a>         
+           </a>
+          <div class="full-width">
+            <p>Segunda a Sexta, 08h às 18h - Exceto feriados</p>
+          </div>
+       </li>
+       <li class="categories-cards__card flex-start">
+         <a>
+           <div class="categories-cards__content">
+             <img
+                src="{{asset "category13819586922395" suffix=".svg"}}"
+                class="categories-cards__image"
+              />
+              <div>
+                <div class='card-service-channels__header'>
+                	<p>WhatsApp</p>
+              	</div>
+              	<h3 class='light'>Para clientes</h3>
+              </div>
+          </div>
+          <a id="customer" class='card-called__button light categories-cards__fullwith'>
+            <div class="categories-card_wpp-span">
+                <img
+                src="{{asset "whatsapp" suffix=".svg"}}"
+                class="categories-card_wpp-icon"
+              />
+             <span>{{settings.customer_1_wpp}}</span>
+            </div>
+          </a>           
+        </a>
+        <div class="full-width">
+            <p>Segunda a Sexta, 08h às 18h - Exceto feriados</p>
+        </div>
+      </li>      
+    </ul>
+  </div>
+</section> 
+<script type="text/javascript" >
+  const wppFormatter = (number) => {
+    let expression =  /[^a-zA-Z0-9]/gi;
+    return number.replace(expression, "");
+  }
+  const partenerWppFormated = wppFormatter("{{settings.partner_hub_wpp}}");
+  const customerWppFormated = wppFormatter("{{settings.customer_1_wpp}}");
+  const addFormatedHref = (phone, msg = "Olá,%20Pode%20me%20ajudar%3F") => {
+    return `https://api.whatsapp.com/send?phone=55${phone}`
+  }
+  const addWppHref = () => {
+    let partnerHrefTag = document.getElementById("partner")
+    partnerHrefTag.href = addFormatedHref(partenerWppFormated)
+    let customerHrefTag = document.getElementById("customer")
+    customerHrefTag.href = addFormatedHref(customerWppFormated);
+  }
+  addWppHref();
+  const editTicketLabelText = () => {
+    const labelTag = document.querySelector("#new_request > div > label");
+    labelTag.textContent = "Escolha seu problema abaixo";
+    labelTag.classList.add("form-title-span");
+  }
+  editTicketLabelText();
+</script>

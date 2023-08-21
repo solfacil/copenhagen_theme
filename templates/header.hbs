@@ -1,98 +1,327 @@
-<a class="skip-navigation" tabindex="1" href="#main-content">{{t 'skip_navigation' }}</a>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-K8MJ4SF');</script>
+<!-- End Google Tag Manager -->
 
-<header class="header">
-  <div class="logo">
-    {{#link 'help_center'}}
-      <img src="{{settings.logo}}" alt="{{t 'home_page' name=help_center.name}}" />
-      {{#if settings.show_brand_name}}
-        <span aria-hidden="true">{{help_center.name}}</span>
-      {{/if}}
-    {{/link}}
-  </div>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K8MJ4SF"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
-  <div class="nav-wrapper-desktop">
-    <nav class="user-nav" id="user-nav">
-      <ul class="user-nav-list">
-        <li>{{link 'community'}}</li>
-        <li>{{link 'new_request' class='submit-a-request'}}</li>
-        {{#unless signed_in}}
-          <li>
-            {{#link "sign_in" class="sign-in"}}
-              {{t 'sign_in'}}
-            {{/link}}
-          </li>
-        {{/unless}}
-      </ul>
-    </nav>
-    {{#if signed_in}}
-      <div class="user-info dropdown">
-        <button class="dropdown-toggle" aria-haspopup="true">
-          {{user_avatar class="user-avatar"}}
-          <span>
-            {{user_name}}
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="dropdown-chevron-icon" aria-hidden="true">
-              <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
-            </svg>
-          </span>
-        </button>
-        <div class="dropdown-menu" role="menu">
-          {{#my_profile role="menuitem"}}{{t 'profile'}}{{/my_profile}}
-          {{link "requests" role="menuitem"}}
-          {{#link "contributions" role="menuitem"}}{{t "activities"}}{{/link}}
-          {{contact_details role="menuitem"}}
-          {{change_password role="menuitem"}}
-          <div class="separator" role="separator"></div>
-          {{link "sign_out" role="menuitem"}}
-        </div>
-      </div>
-    {{/if}}
-  </div>
-
-  <div class="nav-wrapper-mobile">
-    <button class="menu-button-mobile" aria-controls="user-nav-mobile" aria-expanded="false" aria-label="{{t 'toggle_navigation'}}">
+<header>
+  <div class='header'>
+    <div class='header__content'>
+      <div class="header__content-start">
+      <a href='/hc/pt-br' class='header-logo'>
+        <img class='header-logo__img' src='{{settings.logo}}' alt='Solfácil' />
+        <p class='header__link'>Central de ajuda</p>
+      </a>
+      <img src='{{asset "line.svg"}}' alt='Line icon' />
       {{#if signed_in}}
-        {{user_avatar class="user-avatar"}}
+        <a class="header__link__custom" href='https://integrador.solfacil.com.br/' rel="noreferrer">
+            <span class='header__dropdown-welcome-custom'>
+              Ir para o
+            </span>
+          	<div class="header__link__custom-content">
+              <p>Portal do Integrador</p>
+           		<img src='{{asset "open-in-new.svg"}}' alt='Open in new Icon' />
+            </div>
+        </a>
+      {{else}}
+      	<a class="header__link__custom" href='https://landing.solfacil.com.br/' rel="noreferrer">
+            <span class='header__dropdown-welcome-custom'>
+              Ir para o
+            </span>
+          	<div class="header__link__custom-content">
+              <p>Site Solfácil</p>
+           		<img src='{{asset "open-in-new.svg"}}' alt='Open in new Icon' />
+            </div>
+        </a>
       {{/if}}
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" focusable="false" viewBox="0 0 16 16" class="icon-menu">
-        <path fill="none" stroke="currentColor" stroke-linecap="round" d="M1.5 3.5h13m-13 4h13m-13 4h13"/>
-      </svg>
-    </button>
-    <nav class="menu-list-mobile" id="user-nav-mobile" aria-expanded="false">
-      <ul class="menu-list-mobile-items">
+      </div>
+      <nav class='header__nav'>
         {{#if signed_in}}
-          <li class="user-avatar-item item">
-            {{#my_profile role="menuitem" class="my-profile"}}
-              {{user_avatar class="menu-profile-avatar"}}
-              <div class="menu-profile-name">
-                <div>{{user_name}}</div>
-                <div class="my-profile-tooltip">{{t 'profile'}}</div>
-              </div>
-            {{/my_profile}}
-          </li>
-          <li class="item">{{link "requests" role="menuitem"}}</li>
-          <li class="item">{{#link "contributions" role="menuitem"}}{{t "activities"}}{{/link}}</li>
-          <li class="item">{{contact_details role="menuitem"}}</li>
-          <li class="item">{{change_password role="menuitem" class='change-password'}}</li>
-          <li class="nav-divider"></li>
+          <div class='header__dropdown'>
+            <a href='/hc/pt-br'>Início</a>
+            <a href="/requests/new">Abrir chamado</a>
+    				<a class='header__button-green' href="/requests">Meus chamados</a>
+            <img src='{{asset "account.svg"}}' alt='Account' />
+            <div class="dropdown--text">
+              <span class='header__dropdown-welcome'>
+                Boas-vindas
+              </span>
+              <p>{{user_name}}</p>
+            </div>
+            <img class="dropdown-icon" src='{{asset "dropdown-icon.svg"}}' />
+            <div class="dropdown__content">
+              <a href="/access/logout">
+                <span>Sair</span>
+                <img src='{{asset "logout.svg"}}' alt='Logout' />
+              </a>
+            </div>
+          </div>
+        <div class='header__dropdown__menu'>
+           <div class="dropdown--user">
+            <img src='{{asset "account.svg"}}' alt='Account' />
+            <div class="dropdown--text">
+              <span class='header__dropdown-welcome'>
+                Boas-vindas
+              </span>
+              <p>{{user_name}}</p>
+             </div>
+            </div>
+            <a href='/hc/pt-br'>Início</a>
+            <a href="/requests/new">Abrir chamado</a>
+    				<a class='header__button-green' href="/requests">Meus chamados</a>
+          	<div> 
+              <a href="/access/logout">Sair</a>
+              <img src='{{asset "logoutwhite.svg"}}' alt='Logout' />
+            </div>
+          <a class="header__link__custom__menu" href='https://landing.solfacil.com.br/' rel="noreferrer">
+            <span class='header__dropdown-welcome-custom'>
+              Ir para o
+            </span>
+          	<div class="header__link__custom-content">
+              <p>Portal do Integrador</p>
+           		<img src='{{asset "open-in-new.svg"}}' alt='Open in new Icon' />
+            </div>
+        </a>
+          </div>
         {{else}}
-          <li class="item">
-            {{#link "sign_in" role="menuitem"}}
-              {{t 'sign_in'}}
-            {{/link}}
-          </li>
-          <li class="nav-divider"></li>
+        	<a href='/hc/pt-br'>Início</a>
+          <a href='/access'>
+            <div class='hearder_dropdown-noauth'>
+              <img src='{{asset "account.svg"}}' alt='Account' />
+              <div class="dropdown--text">
+                <span class='header__dropdown-welcome'>
+                    Boas-vindas
+                </span>
+                <p>Entrar</p>
+              </div>
+            </div>
+          </a>
+        	<a class="header__link__custom__menu" href='https://landing.solfacil.com.br/' rel="noreferrer">
+            <span class='header__dropdown-welcome-custom'>
+              Ir para o
+            </span>
+          	<div class="header__link__custom-content">
+              <p>Site Solfácil</p>
+           		<img src='{{asset "open-in-new.svg"}}' alt='Open in new Icon' />
+            </div>
+        	</a>
         {{/if}}
-        <li class="item">{{link 'community' role="menuitem"}}</li>
-        <li class="item">{{link 'new_request' role="menuitem" class='submit-a-request'}}</li>
-        <li class="nav-divider"></li>
-        {{#if signed_in}}
-          <li class="item">
-            {{link "sign_out" role="menuitem"}}
-          </li>
-        {{/if}}
-        </li>
-      </ul>
-    </nav>
+      </nav>
+      <div class='header__button'>
+        <div class='button__line1'></div>
+        <div class='button__line2'></div>
+        <div class='button__line3'></div>
+      </div>
+    </div>
   </div>
+<script type="text/javascript">
+  const changeDisplayTag = (tag, styleDisplay = "block") => {
+  let currentTag = document.querySelector(tag);
+  if (currentTag){
+    currentTag.style.display = styleDisplay;
+    }
+	}
+  let versoes
+	if({{signed_in}}){
+  	versoes = {
+    1: {
+      min: 1280,
+      max: Infinity,
+      nome: "Versão 1",
+      acao: () => {
+  			changeDisplayTag(".header__dropdown__menu", "none")
+  			
+  			changeDisplayTag(".header__dropdown", "flex");
+  			
+      }
+    },
+  	2: {
+      min: 1064,
+      max: 1279,
+      nome: "Versão 2",
+      acao: () => {
+  			changeDisplayTag(".header__dropdown__menu", "none");
+  			
+  
+  			changeDisplayTag(".header__dropdown", "flex");
+        changeDisplayTag("body > header > div > div > div.header__content-start > img");
+  			changeDisplayTag("body > header > div > div > div.header__content-start > a.header__link__custom");
+  			changeDisplayTag("body > header > div > div > nav > div.header__dropdown > a:nth-child(1)");
+  			changeDisplayTag("body > header > div > div > nav > div.header__dropdown > a:nth-child(2)");
+      }
+    },
+    3: {
+      min: 900,
+      max: 1063,
+      nome: "Versão 2",
+      acao: () => {
+  			changeDisplayTag(".header__dropdown__menu", "none");
+  			changeDisplayTag("body > header > div > div > nav > div.header__dropdown > a:nth-child(1)", "none");
+  			changeDisplayTag("body > header > div > div > nav > div.header__dropdown > a:nth-child(2)", "none");
+  
+  			changeDisplayTag(".header__dropdown", "flex");
+        changeDisplayTag("body > header > div > div > div.header__content-start > img");
+  			changeDisplayTag("body > header > div > div > div.header__content-start > a.header__link__custom");
+      }
+    },
+    4: {
+      min: 566,
+      max: 899,
+      nome: "Versão 3",
+      acao: () => {
+  			changeDisplayTag(".header__dropdown", "none");
+  			changeDisplayTag(".header__dropdown__menu", "flex");
+  
+  			changeDisplayTag("body > header > div > div > div.header__content-start > a.header__link__custom", "none");
+  			changeDisplayTag("body > header > div > div > div.header__content-start > img", "none");
+  			
+  			changeDisplayTag("body > header > div > div > nav > a.header__link__custom__menu", "block");
+      }
+    },
+    5: {
+      min: -Infinity,
+      max: 565,
+      nome: "Versão 4",
+      acao: () => {
+  				changeDisplayTag(".header__dropdown", "none");
+  				changeDisplayTag("body > header > div > div > div.header__content-start > a.header__link__custom", "none");
+  				changeDisplayTag("body > header > div > div > div.header__content-start > img", "none");
+  				
+  				changeDisplayTag(".header__dropdown__menu", "flex");
+      }
+    }
+  };
+  } else {
+    versoes = {
+      1: {
+        min: 1280,
+        max: Infinity,
+        nome: "Versão 1",
+        acao: () => {
+          changeDisplayTag("body > header > div > div > nav > a.header__link__custom__menu", "none");
+        }
+      },
+      2: {
+        min: 900,
+        max: 1279,
+        nome: "Versão 2",
+        acao: () => {
+          changeDisplayTag("body > header > div > div > nav > a.header__link__custom__menu", "none")
 
+          changeDisplayTag("body > header > div > div > div.header__content-start > a.header__link__custom");
+          changeDisplayTag("body > header > div > div > div.header__content-start > img");
+        }
+      },
+      3: {
+        min: 566,
+        max: 899,
+        nome: "Versão 3",
+        acao: () => {
+          changeDisplayTag("body > header > div > div > div.header__content-start > a.header__link__custom", "none");
+          changeDisplayTag("body > header > div > div > div.header__content-start > img", "none");
+
+          changeDisplayTag("body > header > div > div > nav > a.header__link__custom__menu", "block");
+        }
+      },
+      4: {
+        min: -Infinity,
+        max: 565,
+        nome: "Versão 4",
+        acao: () => {
+            changeDisplayTag("body > header > div > div > div.header__content-start > a.header__link__custom", "none");
+            changeDisplayTag("body > header > div > div > div.header__content-start > img", "none");
+        }
+      }
+    };
+}
+
+let versaoAtual = null;
+  
+document.addEventListener('DOMContentLoaded', () => {
+  let width = window.innerWidth;
+  
+  let versaoAtual = null;
+    for (let versao in versoes) {
+      if (width >= versoes[versao].min && width <= versoes[versao].max) {
+        versaoAtual = versoes[versao];
+        break;
+      }
+    }
+
+    if (versaoAtual !== null) {
+      versaoAtual.acao();
+    }
+  });
+
+window.addEventListener('resize', (event) => {
+  let width = window.innerWidth;
+   versaoAtual = null;
+    for (let versao in versoes) {
+      if (width >= versoes[versao].min && width <= versoes[versao].max) {
+        versaoAtual = versoes[versao];
+        break;
+      }
+    }
+
+    if (versaoAtual !== null) {
+    	versaoAtual.acao();
+    }
+  });
+
+if({{signed_in}}){
+    function dropdownClassAdd() {
+        let dropdown = document.querySelector('.dropdown__content');
+        let icon = document.querySelector(".dropdown-icon");
+        if(dropdown !== null){
+            dropdown.classList.add("dropdown-show");
+            icon.classList.add("icon-active");    
+        }
+
+    }
+
+    let dropdown = document.querySelector('.header__dropdown');
+
+    dropdown.addEventListener("click", (e) => {
+        if (e.target.closest('.header__dropdown')) {
+            dropdownClassAdd()
+        }
+    })  
+
+    window.onclick = (event) => {
+        if (!event.target.closest('.dropdown--text')) {
+            let dropdowns = document.getElementsByClassName("dropdown__content");
+            let icon = document.querySelector(".dropdown-icon");
+            for (let i = 0; i < dropdowns.length; i++) {
+                let openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains("dropdown-show")) {
+                    openDropdown.classList.remove("dropdown-show");
+                    icon.classList.remove("icon-active");
+                }
+            }
+        }
+    }
+}
+
+
+if(window.location.pathname == "/hc/pt-br"){
+  const elemento = document.querySelector('.header');
+	const tagsRemover = elemento.getElementsByTagName('a');
+
+  for (let i = tagsRemover.length - 1; i >= 0; i--) {
+    const tag = tagsRemover[i];
+    const href = tag.getAttribute('href');
+    const classe = tag.getAttribute('class');
+    if (href === '/hc/pt-br' && classe !== 'header-logo') {
+      tag.parentNode.removeChild(tag);
+    }
+  }                                         
+}
+</script>
 </header>

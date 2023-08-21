@@ -1,25 +1,22 @@
-<footer class="footer">
-  <div class="footer-inner">
-    {{#link 'help_center'}}{{help_center.name}}{{/link}}
-
-    <div class="footer-language-selector">
-      {{#if alternative_locales}}
-        <div class="dropdown language-selector">
-          <button class="dropdown-toggle" aria-haspopup="true">
-            {{current_locale.name}}
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="dropdown-chevron-icon">
-              <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
-            </svg>
-          </button>
-          <span class="dropdown-menu dropdown-menu-end" role="menu">
-            {{#each alternative_locales}}
-              <a href="{{url}}" dir="{{direction}}" rel="nofollow" role="menuitem">
-                {{name}}
-              </a>
-            {{/each}}
-          </span>
-        </div>
-      {{/if}}
+<footer>     
+  <div class='footer'>
+    <div class='container'>
+        <div class='footer-social__media'>
+          <div class='footer-social__logo'>
+	          <img class='footer-logo__img' src='{{settings.logo}}' alt='Solfácil' />
+          </div>
+          <a>
+          	<span>Acesse nossas redes sociais</span>
+          </a>
+          <div class="footer-icons">
+          <a href='{{settings.instagram_link}}' rel="noopener noreferrer">
+            <img src='{{asset "instagram.svg"}}' alt='instagram' />
+          </a>
+          <a href='{{settings.linkedin_link}}' rel="noopener noreferrer">
+            <img src='{{asset "linkedin.svg"}}' alt='linkedin' />
+          </a>
+          </div>
+        </div>              
     </div>
   </div>
 </footer>

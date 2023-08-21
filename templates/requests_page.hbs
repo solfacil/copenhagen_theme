@@ -1,140 +1,691 @@
-<div class="container">
-  {{#if settings.request_list_beta}}
+<style>
+  .card-service-channels.negative {
+    display: none;
+  }
+
+  .footer {
+    margin-top: 1rem;
+    min-height: 296px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .accordion-container {
+    display: flex;
+    flex-direction: row;
+    column-gap: 20px;
+    justify-content: space-between;
+    background-color: #f6f6f6;
+    padding: 0px 16px 24px 16px;
+  }
+
+  @media screen and (max-width: 900px) {
+    .accordion-container {
+      flex-direction: column;
+    }
+
+    .accordion-container section {
+      margin: 0;
+    }
+  }
+
+  .accordion-container section {
+    width: 100%;
+  }
+
+  .accordion-container .left-side {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .accordion-container .left-side .comments {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: 640px;
+    padding: 47px 34px;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #F2F2F2;
+    overflow-y: auto;
+  }
+
+  .accordion-container .left-side .comments .comentary {
+    display: flex;
+    height: fit-content;
+    width: 100%;
+    flex-direction: column;
+    gap: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #E6E6E6;
+  }
+
+  .accordion-container .left-side .comments .comentary:first-child {
+    border: none;
+    padding: 0px;
+  }
+
+  .accordion-container .left-side .comments .comentary .comentary-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .accordion-container .left-side .comments .comentary .comentary-header .avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 16px;
+    width: 56px;
+    height: 56px;
+    border-radius: 100%;
+    background-color: #E6E6E6;
+  }
+
+  .accordion-container .left-side .comments .comentary .comentary-header .infos {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .accordion-container .left-side .comments .comentary .comentary-header .infos .name {
+    color: #000;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+  }
+
+  .accordion-container .left-side .comments .comentary .comentary-header .infos .time {
+    color: #000;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  .accordion-container .left-side .comments .comentary .comentary-body {
+    color: #2F2F2F;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+  }
+
+  .accordion-container .left-side .new-comment {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .accordion-container .left-side .new-comment .title {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    /* 150% */
+  }
+
+  .accordion-container .left-side .new-comment form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .accordion-container .left-side .new-comment form textarea {
+    height: 112px;
+    padding: 12px 24px;
+    border-radius: 4px;
+    border: 1px solid #606060;
+    opacity: 0.8;
+    color: #606060;
+    resize: none;
+    background-color: transparent;
+    outline: none;
+  }
+
+  .accordion-container .left-side .new-comment form button {
+    border: none;
+    width: 109.685px;
+    padding: 18px 32px;
+    border-radius: 8px;
+    background: #000;
+    color: #fff;
+    box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.16);
+  }
+
+  .accordion-container .right-side {
+    width: 60%;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .sidebar .request-details {
+    font-size: 16px;
+    display: flex;
+    justify-content: left;
+  }
+
+  .sidebar dt {
+    width: 50%;
+    font-size: 16px;
+  }
+
+  .sidebar dd {
+    font-size: 16px;
+    width: 50%;
+    color: #606060;
+  }
+
+  .spacer-line {
+    display: block;
+    width: 100%;
+    background-color: #E6E6E6;
+  }
+
+  .spacer-line-comments {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #E6E6E6;
+  }
+
+  .sol-upload {
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: rgba(200, 200, 200, 0.16);
+    border-radius: 0.5rem;
+    border-style: dashed;
+    border-color: rgba(200, 200, 200, 1);
+    border-width: 1px;
+    color: rgba(117, 117, 117, 1);
+    cursor: pointer;
+  }
+
+  .sol-upload .input-hidden {
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 0;
+    cursor: pointer;
+  }
+
+  .sol-upload .file-text {
+    color: #606060;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  ul li {
+    display: flex;
+    gap: 8px;
+  }
+
+  ul li .file-name {
+    color: #0076E2;
+    font-family: Lato;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    /* 150% */
+  }
+
+  ul li .actions {
+    color: #000;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    /* 142.857% */
+  }
+
+  .status-label-open {
+    color: #998b0a !important;
+  }
+
+  .status-label-closed {
+    color: #00b569 !important;
+  }
+
+  .attachments {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 16px;
+    font-size: 16px;
+  }
+
+  .color-gray-light {
+    color: #606060;
+  }
+
+  #requests-table-holder {
+    height: max-content !important;
+  }
+</style>
+<section>
+  <div class="request-breadcrumbs">{{breadcrumbs}}</div>
+  <div class="container">
     <header class="my-activities-header">
-      <h1>{{t 'requests'}}</h1>
+      <div class="form-title-text">
+        <h1>Meus chamados</h1>
+      </div>
+      <a class='card-called__button light' href='/requests/new'>
+        Abrir chamado
+      </a>
     </header>
-
-    <div id="main-content">
-      {{request_list}}
-    </div>
-  {{else}}
-    <header class="my-activities-header">
-      <h1>{{t 'my_requests'}}</h1>
-
-      <div class="my-activities-sub-nav">
-        <nav class="collapsible-nav collapsible-nav-border">
-          <button type="button" class="collapsible-nav-toggle" aria-label="{{t 'toggle_navigation'}}" aria-expanded="false">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false" viewBox="0 0 12 12" aria-hidden="true" class="collapsible-nav-toggle-icon chevron-icon">
-              <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false" viewBox="0 0 12 12" aria-hidden="true" class="collapsible-nav-toggle-icon x-icon">
-              <path stroke="currentColor" stroke-linecap="round" d="M3 9l6-6m0 6L3 3"/>
-            </svg>
-          </button>
-          <ul class="collapsible-nav-list">
-            {{#each filters}}
-              {{#if selected}}
-                <li class="current">
-                  <a href="{{url}}" aria-current="page">{{name}}</a>
-                </li>
-              {{else}}
-                <li><a href="{{url}}">{{name}}</a></li>
-              {{/if}}
-            {{/each}}
-          </ul>
-        </nav>
-      </div>
-    </header>
-
-    {{#form 'requests_filter' id="main-content" class='requests-table-toolbar'}}
-      <div class="search">
-        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-icon" aria-hidden="true">
-          <circle cx="4.5" cy="4.5" r="4" fill="none" stroke="currentColor"/>
-          <path stroke="currentColor" stroke-linecap="round" d="M11 11L7.5 7.5"/>
-        </svg>
-        {{label 'query' for='quick-search' class='visibility-hidden'}}
-        {{input 'query' id='quick-search' type='search' class='requests-search'}}
-      </div>
-      {{#if help_center.multiple_organizations_enabled}}
-        <div class="request-table-filter">
-          {{label 'organization' for='request-organization-select' class='request-filter request-filter-label'}}
-          {{select 'organization' id='request-organization-select' class='request-filter'}}
-        </div>
-      {{/if}}
-
-      <div class="request-table-filter organization-subscribe">
-        {{subscribe}}
-      </div>
-
-      <div class="request-table-filter">
-        {{label 'status' for='request-status-select' class='request-filter request-filter-label'}}
-        {{select 'status' id='request-status-select' class='request-filter'}}
-      </div>
-    {{/form}}
-
     {{#if query}}
-      <div class="requests-search-info meta-data">
-        {{t 'requests_search_results_info' count=requests.length query=query}}
-      </div>
+    <div class="requests-search-info meta-data">
+      {{t 'requests_search_results_info' count=requests.length query=query}}
+    </div>
     {{else}}
-      {{#unless requests}}
+    <!--{{#unless requests}}
         <p class="no-activities">{{t 'no_requests'}}</p>
-      {{/unless}}
+      {{/unless}}-->
     {{/if}}
 
     <div class="requests">
-      {{#if requests}}
-        <table class="table my-activities-table requests-table {{current_filter.identifier}}-requests">
+      <div id="requests-table-holder" class="table-holder">
+        <table class="table my-activities-table requests-table {{current_filter.identifier}}-requests"
+          id="tableRequest">
           <thead>
             <tr>
-              <th>{{t 'subject'}}</th>
-              <th>{{t 'id'}}</th>
-              <th>
-                {{#is current_filter.identifier 'my'}}
-                  {{#link 'requests' sort_by='created_at'}}{{t 'created'}}{{/link}}
-                {{else}}
-                  {{t 'requester'}}
-                {{/is}}
-              </th>
-              <th>{{#link 'requests' sort_by='updated_at'}}{{t 'last_activity'}}{{/link}}</th>
-              <th>
-                {{t 'status'}}
-              </th>
+              <th>Assunto</th>
+              <th>ID projeto</th>
+              <th>Protocolo</th>
+              <th>Criado</th>
+              <th>Status</th>
             </tr>
           </thead>
-
           <tbody>
-            {{#each requests}}
-              <tr {{#is status 'closed'}} class="request-closed" {{/is}}>
-                <td class="request-info requests-table-info">
-                  <a href="{{url}}" class="striped-list-title" title="{{subject}}">
-                    {{#if subject}}
-                      {{subject}}
-                    {{else}}
-                      {{excerpt description characters=50}}
-                    {{/if}}
-                  </a>
-
-                  <!-- Visible on mobile -->
-                  <div class="requests-table-meta">
-                    <span class="meta-data">#{{id}}</span>
-                    <span class="meta-data">{{date created_at timeago=true}}</span>
-                    <span class="status-label status-label-request status-label-{{status}}" title="{{status_description}}">
-                      {{status_name}}
-                    </span>
-                  </div>
-                </td>
-                <td>#{{id}}</td>
-                <td>
-                  {{#is ../current_filter.identifier 'my'}}
-                    {{date created_at timeago=true}}
-                  {{else}}
-                    {{requester.name}}
-                  {{/is}}
-                </td>
-                <td>{{date updated_at timeago=true}}</td>
-                <td class="requests-table-status">
-                  <span class="status-label status-label-request status-label-{{status}}" title="{{status_description}}">
-                    {{status_name}}
-                  </span>
-                </td>
-              </tr>
-            {{/each}}
+            <tr style="border: 0">
+              <td colspan="5">
+                <div id="loading" class="lds-spinner">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              </td>
+            </tr>
           </tbody>
         </table>
-      {{/if}}
+      </div>
+      <nav class="pagination custom-pagination" hidden>
+        <ul class="pagination-list">
+          <li class="pagination-button">
+            <button disabled name="prev" aria-label="Página anterior">
+              <img src="{{asset 'chevron-left.svg'}}" />
+            </button>
+          </li>
+          <li class="current-pagination">
+            <input type="text" name="page" value="1" />
+          </li>
+          <li class="pagination-count"></li>
+          <li class="pagination-button">
+            <button disabled name="next" aria-label="Próxima página">
+              <img src="{{asset 'chevron-right.svg'}}" />
+            </button>
+          </li>
+        </ul>
+      </nav>
     </div>
+  </div>
+</section>
+<section>
+  <div class='form-title'>
+    <h2>Não encontrou o que procurava? Entre em contato pelo nosso WhatsApp</h2>
+  </div>
+  <div class="categories-cards">
+    <ul>
+      <li class="categories-cards__card flex-start">
+        <a>
+          <div class="categories-cards__content">
+            <img src="{{asset " category13819539135643" suffix=".svg" }}" class="categories-cards__image" />
+            <div>
+              <div class='card-service-channels__header'>
+                <p>WhatsApp</p>
+              </div>
+              <h3 class='light'>Para integradores</h3>
+            </div>
+          </div>
+          <a id="partner" class='card-called__button light categories-cards__fullwith'>
+            <div class="categories-card_wpp-span">
+              <img src="{{asset " whatsapp" suffix=".svg" }}" class="categories-card_wpp-icon" />
+              <span>{{settings.partner_hub_wpp}}</span>
+            </div>
+          </a>
+        </a>
+        <div class="full-width">
+          <p>Segunda a Sexta, 08h às 18h - Exceto feriados</p>
+        </div>
+      </li>
+      <li class="categories-cards__card flex-start">
+        <a>
+          <div class="categories-cards__content">
+            <img src="{{asset " category13819586922395" suffix=".svg" }}" class="categories-cards__image" />
+            <div>
+              <div class='card-service-channels__header'>
+                <p>WhatsApp</p>
+              </div>
+              <h3 class='light'>Para clientes</h3>
+            </div>
+          </div>
+          <a id="customer" class='card-called__button light categories-cards__fullwith'>
+            <div class="categories-card_wpp-span">
+              <img src="{{asset " whatsapp" suffix=".svg" }}" class="categories-card_wpp-icon" />
+              <span>{{settings.customer_1_wpp}}</span>
+            </div>
+          </a>
+        </a>
+        <div class="full-width">
+          <p>Segunda a Sexta, 08h às 18h - Exceto feriados</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+<script type="text/javascript">
+  const wppFormatter = (number) => {
+    let expression = /[^a-zA-Z0-9]/gi;
+    return number.replace(expression, "");
+  }
+  const partenerWppFormated = wppFormatter("{{settings.partner_hub_wpp}}");
+  const customerWppFormated = wppFormatter("{{settings.customer_1_wpp}}");
+  const addFormatedHref = (phone) => {
+    return `https://api.whatsapp.com/send?phone=55${phone}`
+  }
+  const addWppHref = () => {
+    let partnerHrefTag = document.getElementById("partner")
+    partnerHrefTag.href = addFormatedHref(partenerWppFormated)
+    let customerHrefTag = document.getElementById("customer")
+    customerHrefTag.href = addFormatedHref(customerWppFormated);
+  }
+  addWppHref();
 
-    {{pagination}}
-  {{/if}}
-</div>
+  const formatTimestamp = (timestamp) => {
+    const data = new Date(timestamp);
+    const dataAtual = new Date();
+    const diferencaEmMilissegundos = dataAtual - data;
+    const segundos = Math.floor(diferencaEmMilissegundos / 1000);
+    const minutos = Math.floor(segundos / 60);
+    const horas = Math.floor(minutos / 60);
+    const dias = Math.floor(horas / 24);
+    const meses = Math.floor(dias / 30);
+    const anos = Math.floor(meses / 12);
+
+    let resultado = "";
+    if (anos > 0) {
+      resultado = `Há ${anos} ano${anos > 1 ? 's' : ''}`;
+    } else if (meses > 0) {
+      resultado = `Há ${meses} mês${meses > 1 ? 'es' : ''}`;
+    } else if (dias > 0) {
+      resultado = `Há ${dias} dia${dias > 1 ? 's' : ''}`;
+    } else if (horas > 0) {
+      resultado = `Há ${horas} hora${horas > 1 ? 's' : ''}`;
+    } else if (minutos > 0) {
+      resultado = `Há ${minutos} minuto${minutos > 1 ? 's' : ''}`;
+    } else {
+      resultado = `Há alguns segundos`;
+    }
+
+    return resultado
+  }
+
+  const ticketComments = (ticketId) => __awaiter(void 0, void 0, void 0, function* () {
+  	var data = {
+      "method": "get",
+      "url": `https://helpcentersolfacil.zendesk.com/api/v2/tickets/${ticketId}/audits`
+    }
+  
+    const tickets = []
+  	const response = yield handleBffRequest(data)
+
+    for (const audit of response?.audits) {
+      if (audit?.events) {
+        for (const event of audit?.events) {
+          if (event?.value && event?.value?.history) {
+            for (const history of event?.value?.history) {
+              if (history?.type === 'ChatMessage') {
+  							const actor = properties?.users?.find(user => user.id == history?.actor_id)
+
+                if (actor) {
+                  history.actor_name = actor?.name
+  							}
+  
+                tickets.push({
+                  date: formatTimestamp(history?.timestamp),
+                  text: history?.message,
+                  user: history?.actor_name,
+                })
+              }
+            }
+          } else if (event?.type === 'Comment' && event?.public) {
+            const actor = properties?.users?.find(user => user.id == event?.author_id)
+            tickets.push({
+              date: '',
+              text: event?.body,
+              user: actor?.name || 'Usuário não identificado'
+            })
+          }
+        }
+      }
+    }
+
+    function avatarsLetters(fullName) {
+      const palavras = fullName.split(' ');
+
+      if (palavras.length >= 2) {
+        const primeiraLetraPrimeiroNome = palavras[0].charAt(0);
+
+        const ultimoNome = palavras[palavras.length - 1];
+        const primeiraLetraUltimoNome = ultimoNome.charAt(0);
+
+        return `${primeiraLetraPrimeiroNome}${primeiraLetraUltimoNome}`;
+      } else {
+        return fullName.charAt(0);
+      }
+    }
+
+    async function listComments(element) {
+      element.innerHTML = ''
+
+      for (const request of tickets) {
+        element.innerHTML += `
+  				<div class="comentary">
+            	<div class="comentary-header">
+            		<div class="avatar">${avatarsLetters(request?.user?.toString())}</div>
+            		<div class="infos">
+            			<span class="name">${request.user}</span>
+            			<span class="time">${request.date}</span>
+            		</div>
+              </div>
+              
+              <div class="comentary-body">${request.text}</div>
+            </div>
+    			`
+      }
+    }
+
+    var elements = document.getElementsByClassName('comments')
+    for (const element of elements) {
+      if (element?.dataset?.id == ticketId) {
+  			if (tickets?.length <= 0) {
+        	element.innerHTML = `
+          	<div class="comentary">Os comentários deste chamado não estão disponíveis no momento.</div>
+          `         
+        } else {
+        	listComments(element)   
+                                
+          element.scrollTo({
+            top: element.scrollHeight,
+            behavior: 'instant'
+          })
+        }
+      }
+    }
+  })
+
+  const accordion = (userId) => {
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function () {
+        const formI = document.getElementById("requests-table-holder");
+        var panel = this.nextElementSibling;
+        if (panel.style.display !== "none" && panel.style.display !== '') {
+          panel.style.display = "none";
+          properties.ticketView = 0
+        } else {
+          for (let value of document.getElementsByClassName("accordion active")) { // FECHAR OS OUTROS ACCORDIONS ABERTOS
+            value.classList.remove("active")
+            value.nextElementSibling.style.display = "none";
+          }
+					
+          if (document.getElementById(`attachments-list-${panel?.dataset?.id}`)) {
+          	document.getElementById(`attachments-list-${panel?.dataset?.id}`).innerHTML = `<li><span>Nenhum arquivo anexado!</span></li>`
+          }
+          ticketComments(panel?.dataset?.id)
+          properties.ticketView = panel?.dataset?.id
+          panel.style.display = "table-row";
+        }
+        window.scrollTo({ top: panel.offsetTop, behavior: 'smooth' })
+        this.classList.toggle("active");
+        formI.style.height = 'max-content'
+      });
+    }
+
+    /* PARTE DOS ANEXOS */
+    let selectedFiles = []
+
+    function returnFileSize(number) {
+      if (number < 1024) {
+        return `${number} bytes`;
+      } else if (number >= 1024 && number < 1048576) {
+        return `${(number / 1024).toFixed(1)} KB`;
+      } else if (number >= 1048576) {
+        return `${(number / 1048576).toFixed(1)} MB`;
+      }
+    }
+
+    const uploadChanged = (input) => {
+      let list
+      var elementos = document.getElementsByClassName('attachments-list')
+      for (const t of elementos) {
+        if (t?.dataset?.id == properties?.ticketView) {
+          list = t
+        }
+      }
+
+      const curFiles = input.files;
+      if (curFiles.length === 0) {
+        list.innerHTML = `
+          <li>
+            <span>Nenhum arquivo anexado!</span>
+          </li>
+        `
+      } else {
+        for (let i = 0; i < curFiles.length; i++) {
+          const file = curFiles[i]
+
+          list.innerHTML += `
+            <li>
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="20" viewBox="0 0 12 20" fill="none">
+                  <path d="M0.264572 5.5C0.264572 4.04131 0.847677 2.64236 1.88561 1.61091C2.92355 0.579462 4.33129 -3.04174e-07 5.79916 -2.40413e-07C7.26702 -1.76651e-07 8.67476 0.579463 9.7127 1.61091C10.7506 2.64236 11.3337 4.04131 11.3337 5.5L11.3337 16C11.3337 17.0609 10.9097 18.0783 10.1548 18.8284C9.39994 19.5786 8.37612 20 7.30859 20C6.24105 20 5.21724 19.5786 4.46237 18.8284C3.70751 18.0783 3.28344 17.0609 3.28344 16L3.28344 7.5C3.28344 6.83696 3.54848 6.20107 4.02027 5.73223C4.49206 5.26339 5.13195 5 5.79916 5C6.46637 5 7.10625 5.26339 7.57804 5.73223C8.04983 6.20107 8.31488 6.83696 8.31488 7.5L8.31488 15L6.80544 15L6.80544 7.5C6.80544 7.23478 6.69942 6.98043 6.51071 6.79289C6.32199 6.60536 6.06604 6.5 5.79916 6.5C5.53227 6.5 5.27632 6.60536 5.0876 6.79289C4.89889 6.98043 4.79287 7.23478 4.79287 7.5L4.79287 16C4.79287 16.3283 4.85794 16.6534 4.98436 16.9567C5.11079 17.26 5.2961 17.5356 5.5297 17.7678C5.76331 17.9999 6.04064 18.1841 6.34586 18.3097C6.65108 18.4353 6.97822 18.5 7.30859 18.5C7.63896 18.5 7.96609 18.4353 8.27131 18.3097C8.57653 18.1841 8.85386 17.9999 9.08747 17.7678C9.32108 17.5356 9.50638 17.26 9.63281 16.9567C9.75924 16.6534 9.82431 16.3283 9.82431 16L9.82431 5.5C9.82431 4.43913 9.40023 3.42172 8.64537 2.67157C7.89051 1.92143 6.86669 1.5 5.79916 1.5C4.73162 1.5 3.70781 1.92143 2.95294 2.67157C2.19808 3.42172 1.774 4.43913 1.774 5.5L1.774 15L0.264571 15L0.264572 5.5Z" fill="#004A2C"/>
+                </svg>
+              </div>
+
+              <div>
+                <span class="file-name">${file?.name}</span>
+
+                <div class="actions">
+                  ${returnFileSize(file?.size)} • <button class="remove-button" data-index="${i}">Remover</button>
+                </div>
+              </div>
+            </li>
+          `
+
+          selectedFiles.push(file);
+        }
+
+        const removeButtons = list.querySelectorAll('.remove-button');
+        removeButtons.forEach(removeButton => {
+          removeButton.addEventListener('click', event => {
+            const clickedButton = event.target;
+            const index = parseInt(clickedButton.getAttribute('data-index'));
+
+            // Remove o arquivo visualmente da lista
+            const listItem = clickedButton.closest('li');
+            listItem.remove();
+
+            // Remove o arquivo da lista selecionada
+            selectedFiles.splice(index, 1);
+
+            // Atualiza os índices nos atributos data-index dos botões restantes
+            const updatedButtons = list.querySelectorAll('.remove-button');
+            updatedButtons.forEach((button, newIndex) => {
+              button.setAttribute('data-index', newIndex);
+            });
+
+            // Se não houver mais arquivos selecionados, exiba uma mensagem
+            if (selectedFiles.length === 0) {
+              list.innerHTML = `
+                <li>
+                  <span>Nenhum arquivo anexado!</span>
+                </li>
+              `;
+            }
+          });
+        });
+      }
+    }
+
+    for (const el of document.getElementsByClassName('upload-file-input')) {
+      el.addEventListener("change", () => uploadChanged(el));
+    }
+  }
+
+  function formatCreatedAtDate(dateString) {
+    const options = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    };
+
+    const date = new Date(dateString);
+    const formattedDate = date.toLocaleString('pt-BR', options);
+
+    return `Dia ${formattedDate}, às ${date.getHours()}h${date.getMinutes()}`;
+  }
+</script>

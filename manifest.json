@@ -1,406 +1,265 @@
 {
-  "name": "Copenhagen",
-  "author": "Zendesk",
-  "version": "3.1.2",
-  "api_version": 3,
-  "default_locale": "en-us",
+  "name": "Solfácil 4.0",
+  "author": "Solfacil",
+  "version": "1.00.0",
+  "api_version": 2,
+  "default_locale": "pt-br",
   "settings": [
     {
-      "label": "colors_group_label",
+      "label": "integrator_group",
+      "variables": [
+        {
+          "identifier": "partner_hub_wpp",
+          "type": "text",
+          "description": "empty_description",
+          "label": "partner_hub_wpp_label",
+          "value": "(11) 91118-9969"
+        },
+        {
+          "identifier": "partner_hub_phone",
+          "type": "text",
+          "description": "empty_description",
+          "label": "partner_hub_phone_label",
+          "value": "0800 887 1548"
+        },
+        {
+          "identifier": "partner_hub_attendance",
+          "type": "text",
+          "description": "empty_description",
+          "label": "partner_hub_attendance_label",
+          "value": "Segunda a Sexta, 08h às 18h - Exceto feriados"
+        }
+      ]
+    },
+    {
+      "label": "customer_group",
+      "variables": [
+        {
+          "identifier": "customer_1_wpp",
+          "type": "text",
+          "description": "empty_description",
+          "label": "customer_1_wpp_label",
+          "value": "(11) 91240-5689"
+        },
+        {
+          "identifier": "customer_1_phone",
+          "type": "text",
+          "description": "empty_description",
+          "label": "customer_1_phone_label",
+          "value": "0800 887 1559"
+        },
+        {
+          "identifier": "customer_1_attendance",
+          "type": "text",
+          "description": "empty_description",
+          "label": "customer_1_attendance_label",
+          "value": "Segunda a Sábado, 08h às 20h - Exceto feriados"
+        },
+        {
+          "identifier": "customer_2_email",
+          "type": "text",
+          "description": "empty_description",
+          "label": "customer_2_email_label",
+          "value": "ouvidoria@solfacil.com.br"
+        },
+        {
+          "identifier": "customer_2_phone",
+          "type": "text",
+          "description": "empty_description",
+          "label": "customer_2_phone_label",
+          "value": "0800 020 2815"
+        },
+        {
+          "identifier": "customer_2_attendance",
+          "type": "text",
+          "description": "empty_description",
+          "label": "customer_2_attendance_label",
+          "value": "Segunda a Sexta, 09h às 18h - Exceto feriados"
+        },
+        {
+          "identifier": "customer_3_phone",
+          "type": "text",
+          "description": "empty_description",
+          "label": "customer_3_phone_label",
+          "value": "0800 887 1518"
+        },
+        {
+          "identifier": "customer_3_attendance",
+          "type": "text",
+          "description": "empty_description",
+          "label": "customer_3_attendance_label",
+          "value": "Atendimento 24h"
+        },
+        {
+          "identifier": "customer_4_wpp",
+          "type": "text",
+          "description": "empty_description",
+          "label": "customer_4_wpp_label",
+          "value": "(11) 91240-5689"
+        }
+      ]
+    },
+    {
+      "label": "colors_group",
       "variables": [
         {
           "identifier": "brand_color",
           "type": "color",
-          "description": "brand_color_description",
-          "label": "brand_color_label",
-          "value": "#17494D"
+          "description": "color_description",
+          "label": "brand_color_400",
+          "value": "#00B569"
         },
         {
-          "identifier": "brand_text_color",
+          "identifier": "brand_color_700",
           "type": "color",
-          "description": "brand_text_color_description",
-          "label": "brand_text_color_label",
-          "value": "#FFFFFF"
+          "description": "color_hover",
+          "label": "brand_color_700",
+          "value": "#009254"
+        },
+        {
+          "identifier": "brand_color_800",
+          "type": "color",
+          "description": "color_active",
+          "label": "brand_color_800",
+          "value": "#1C6C4B"
+        },
+        {
+          "identifier": "success_color",
+          "type": "color",
+          "description": "color_description",
+          "label": "success_color_400",
+          "value": "#00B569"
+        },
+        {
+          "identifier": "success_color_700",
+          "type": "color",
+          "description": "color_hover",
+          "label": "success_color_700",
+          "value": "#009254"
+        },
+        {
+          "identifier": "success_color_800",
+          "type": "color",
+          "description": "color_active",
+          "label": "success_color_800",
+          "value": "#1C6C4B"
+        },
+        {
+          "identifier": "error_color",
+          "type": "color",
+          "description": "color_description",
+          "label": "error_color_400",
+          "value": "#BA2714"
+        },
+        {
+          "identifier": "error_color_700",
+          "type": "color",
+          "description": "color_hover",
+          "label": "error_color_700",
+          "value": "#941010"
+        },
+        {
+          "identifier": "error_color_800",
+          "type": "color",
+          "description": "color_active",
+          "label": "error_color_800",
+          "value": "#6E170C"
+        },
+        {
+          "identifier": "alert_color",
+          "type": "color",
+          "description": "color_description",
+          "label": "alert_color_400",
+          "value": "#DEC90E"
+        },
+        {
+          "identifier": "alert_color_700",
+          "type": "color",
+          "description": "color_hover",
+          "label": "alert_color_700",
+          "value": "#C0AE0C"
+        },
+        {
+          "identifier": "alert_color_800",
+          "type": "color",
+          "description": "color_active",
+          "label": "alert_color_800",
+          "value": "#998B0A"
         },
         {
           "identifier": "text_color",
           "type": "color",
-          "description": "text_color_description",
-          "label": "text_color_label",
-          "value": "#2F3941"
+          "description": "color_description",
+          "label": "text_color",
+          "value": "#121212"
         },
         {
-          "identifier": "link_color",
+          "identifier": "bg_color",
           "type": "color",
-          "description": "link_color_description",
-          "label": "link_color_label",
-          "value": "#1F73B7"
-        },
-        {
-          "identifier": "hover_link_color",
-          "type": "color",
-          "description": "hover_link_color_description",
-          "label": "hover_link_color_label",
-          "value": "#0F3554"
-        },
-        {
-          "identifier": "visited_link_color",
-          "type": "color",
-          "description": "visited_link_color_description",
-          "label": "visited_link_color_label",
-          "value": "#9358B0"
-        },
-        {
-          "identifier": "background_color",
-          "type": "color",
-          "description": "background_color_description",
-          "label": "background_color_label",
+          "description": "color_description",
+          "label": "bg_color",
           "value": "#FFFFFF"
         }
       ]
     },
     {
-      "label": "fonts_group_label",
-      "variables": [
-        {
-          "identifier": "heading_font",
-          "type": "list",
-          "description": "heading_font_description",
-          "label": "heading_font_label",
-          "options": [
-            {
-              "label": "System",
-              "value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-            },
-            {
-              "label": "Arial",
-              "value": "Arial, 'Helvetica Neue', Helvetica, sans-serif"
-            },
-            {
-              "label": "Arial Black",
-              "value": "'Arial Black', Arial, 'Helvetica Neue', Helvetica, sans-serif"
-            },
-            {
-              "label": "Baskerville",
-              "value": "Baskerville, 'Times New Roman', Times, serif"
-            },
-            {
-              "label": "Century Gothic",
-              "value": "'Century Gothic', sans-serif"
-            },
-            {
-              "label": "Copperplate Light",
-              "value": "'Copperplate Light', 'Copperplate Gothic Light', serif"
-            },
-            {
-              "label": "Courier New",
-              "value": "'Courier New', Courier, monospace"
-            },
-            {
-              "label": "Futura",
-              "value": "Futura, 'Century Gothic', sans-serif"
-            },
-            {
-              "label": "Garamond",
-              "value": "Garamond, 'Hoefler Text', 'Times New Roman', Times, serif"
-            },
-            {
-              "label": "Geneva",
-              "value": "Geneva, 'Lucida Sans', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif"
-            },
-            {
-              "label": "Georgia",
-              "value": "Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif"
-            },
-            {
-              "label": "Helvetica",
-              "value": "Helvetica, Arial, sans-serif"
-            },
-            {
-              "label": "Helvetica Neue",
-              "value": "'Helvetica Neue', Arial, Helvetica, sans-serif"
-            },
-            {
-              "label": "Impact",
-              "value": "Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif"
-            },
-            {
-              "label": "Lucida Grande",
-              "value": "'Lucida Grande', 'Lucida Sans', 'Lucida Sans Unicode', sans-serif"
-            },
-            {
-              "label": "Trebuchet MS",
-              "value": "'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
-            }
-          ],
-          "value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-        },
-        {
-          "identifier": "text_font",
-          "type": "list",
-          "description": "text_font_description",
-          "label": "text_font_label",
-          "options": [
-            {
-              "label": "System",
-              "value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-            },
-            {
-              "label": "Arial",
-              "value": "Arial, 'Helvetica Neue', Helvetica, sans-serif"
-            },
-            {
-              "label": "Arial Black",
-              "value": "'Arial Black', Arial, 'Helvetica Neue', Helvetica, sans-serif"
-            },
-            {
-              "label": "Baskerville",
-              "value": "Baskerville, 'Times New Roman', Times, serif"
-            },
-            {
-              "label": "Century Gothic",
-              "value": "'Century Gothic', sans-serif"
-            },
-            {
-              "label": "Copperplate Light",
-              "value": "'Copperplate Light', 'Copperplate Gothic Light', serif"
-            },
-            {
-              "label": "Courier New",
-              "value": "'Courier New', Courier, monospace"
-            },
-            {
-              "label": "Futura",
-              "value": "Futura, 'Century Gothic', sans-serif"
-            },
-            {
-              "label": "Garamond",
-              "value": "Garamond, 'Hoefler Text', 'Times New Roman', Times, serif"
-            },
-            {
-              "label": "Geneva",
-              "value": "Geneva, 'Lucida Sans', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif"
-            },
-            {
-              "label": "Georgia",
-              "value": "Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman', serif"
-            },
-            {
-              "label": "Helvetica",
-              "value": "Helvetica, Arial, sans-serif"
-            },
-            {
-              "label": "Helvetica Neue",
-              "value": "'Helvetica Neue', Arial, Helvetica, sans-serif"
-            },
-            {
-              "label": "Impact",
-              "value": "Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif"
-            },
-            {
-              "label": "Lucida Grande",
-              "value": "'Lucida Grande', 'Lucida Sans', 'Lucida Sans Unicode', sans-serif"
-            },
-            {
-              "label": "Trebuchet MS",
-              "value": "'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
-            }
-          ],
-          "value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif"
-        }
-      ]
-    },
-    {
-      "label": "brand_group_label",
+      "label": "images_group",
       "variables": [
         {
           "identifier": "logo",
           "type": "file",
-          "description": "logo_description",
-          "label": "logo_label"
-        },
-        {
-          "identifier": "show_brand_name",
-          "type": "checkbox",
-          "description": "show_brand_name_description",
-          "label": "show_brand_name_label",
-          "value": true
+          "description": "file_description",
+          "label": "logo_image"
         },
         {
           "identifier": "favicon",
           "type": "file",
-          "description": "favicon_description",
-          "label": "favicon_label"
-        }
-      ]
-    },
-    {
-      "label": "images_group_label",
-      "variables": [
+          "description": "file_description",
+          "label": "favicon_image"
+        },
         {
-          "identifier": "homepage_background_image",
+          "identifier": "banner",
           "type": "file",
-          "description": "homepage_background_image_description",
-          "label": "homepage_background_image_label"
-        },
-        {
-          "identifier": "community_background_image",
-          "type": "file",
-          "description": "community_background_image_description",
-          "label": "community_background_image_label"
-        },
-        {
-          "identifier": "community_image",
-          "type": "file",
-          "description": "community_image_description",
-          "label": "community_image_label"
+          "description": "file_description",
+          "label": "banner_image"
         }
       ]
     },
     {
-      "label": "search_group_label",
+      "label": "links_group",
       "variables": [
         {
-          "identifier": "instant_search",
-          "type": "checkbox",
-          "description": "instant_search_description",
-          "label": "instant_search_label",
-          "value": true
+          "identifier": "instagram_link",
+          "type": "text",
+          "description": "empty_description",
+          "label": "instagram_link",
+          "value": "https://www.instagram.com/solfacil/"
         },
         {
-          "identifier": "scoped_kb_search",
-          "type": "checkbox",
-          "description": "scoped_knowledge_base_search_description",
-          "label": "scoped_knowledge_base_search_label",
-          "value": true
-        },
-        {
-          "identifier": "scoped_community_search",
-          "type": "checkbox",
-          "description": "scoped_community_search_description",
-          "label": "scoped_community_search_label",
-          "value": true
+          "identifier": "linkedin_link",
+          "type": "text",
+          "description": "empty_description",
+          "label": "linkedin_link",
+          "value": "https://www.linkedin.com/company/solfacil/"
         }
       ]
     },
     {
-      "label": "home_page_group_label",
+      "label": "general_group",
       "variables": [
         {
-          "identifier": "show_recent_activity",
+          "identifier": "show_promoted",
           "type": "checkbox",
-          "description": "recent_activity_description",
-          "label": "recent_activity_label",
-          "value": true
-        }
-      ]
-    },
-    {
-      "label": "article_page_group_label",
-      "variables": [
-        {
-          "identifier": "show_articles_in_section",
-          "type": "checkbox",
-          "description": "articles_in_section_description",
-          "label": "articles_in_section_label",
+          "description": "checkbox_description",
+          "label": "show_promoted",
           "value": true
         },
         {
-          "identifier": "show_article_author",
+          "identifier": "show_search",
           "type": "checkbox",
-          "description": "article_author_description",
-          "label": "article_author_label",
+          "description": "checkbox_description",
+          "label": "show_search",
           "value": true
-        },
-        {
-          "identifier": "show_article_comments",
-          "type": "checkbox",
-          "description": "article_comments_description",
-          "label": "article_comments_label",
-          "value": true
-        },
-        {
-          "identifier": "show_follow_article",
-          "type": "checkbox",
-          "description": "follow_article_description",
-          "label": "follow_article_label",
-          "value": true
-        },
-        {
-          "identifier": "show_recently_viewed_articles",
-          "type": "checkbox",
-          "description": "recently_viewed_articles_description",
-          "label": "recently_viewed_articles_label",
-          "value": true
-        },
-        {
-          "identifier": "show_related_articles",
-          "type": "checkbox",
-          "description": "related_articles_description",
-          "label": "related_articles_label",
-          "value": true
-        },
-        {
-          "identifier": "show_article_sharing",
-          "type": "checkbox",
-          "description": "article_sharing_description",
-          "label": "article_sharing_label",
-          "value": true
-        }
-      ]
-    },
-    {
-      "label": "section_page_group_label",
-      "variables": [
-        {
-          "identifier": "show_follow_section",
-          "type": "checkbox",
-          "description": "follow_section_description",
-          "label": "follow_section_label",
-          "value": true
-        }
-      ]
-    },
-    {
-      "label": "community_post_group_label",
-      "variables": [
-        {
-          "identifier": "show_follow_post",
-          "type": "checkbox",
-          "description": "follow_post_description",
-          "label": "follow_post_label",
-          "value": true
-        },
-        {
-          "identifier": "show_post_sharing",
-          "type": "checkbox",
-          "description": "post_sharing_description",
-          "label": "post_sharing_label",
-          "value": true
-        }
-      ]
-    },
-    {
-      "label": "community_topic_group_label",
-      "variables": [
-        {
-          "identifier": "show_follow_topic",
-          "type": "checkbox",
-          "description": "follow_topic_description",
-          "label": "follow_topic_label",
-          "value": true
-        }
-      ]
-    },
-    {
-      "label": "request_list_group_label",
-      "variables": [
-        {
-          "identifier": "request_list_beta",
-          "type": "checkbox",
-          "description": "request_list_beta_description",
-          "label": "request_list_beta_label",
-          "value": false
         }
       ]
     }

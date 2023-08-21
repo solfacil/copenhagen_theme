@@ -1,83 +1,180 @@
-<h1 class="visibility-hidden">{{ help_center.name }}</h1>
-
-<section id="main-content" class="section hero">
-  <div class="hero-inner">
-    <h2 class="visibility-hidden">{{ t 'search' }}</h2>
-    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-icon" aria-hidden="true">
-      <circle cx="4.5" cy="4.5" r="4" fill="none" stroke="currentColor"/>
-      <path stroke="currentColor" stroke-linecap="round" d="M11 11L7.5 7.5"/>
-    </svg>
-    {{search submit=false instant=settings.instant_search class='search search-full'}}
+<div>  
+  <div class="header__banner">
+      <div class="container title">
+        <h1>Boas-vindas à nossa <b>central de ajuda.</b></h1>
+        <p>Como podemos te ajudar?</p>
+        <div class="header__search">
+          <form
+            accept-charset='UTF-8'
+            action='/hc/search'
+            method='get'
+            role='search'
+            data-instant='{{settings.show_search}}'
+            data-search='true'
+            class="search-bar"
+          >
+            <input name='utf8' type='hidden' value='&#x2713;' />
+            <input
+              class='input search-bar__input'
+              id='query'
+              name='query'
+              placeholder='Digite sua dúvida aqui'
+              type='search'
+            />
+            <button class='button search-bar__button' type='submit'>
+           	<img src='{{asset "lupadark.svg"}}' alt='Search' class='search-bar__icon'/>
+            </button>
+          </form>
+      </div>
+    </div>
+</div>
+<section class="home-category">
+  <div class="categories-cards">
+    <ul>
+        <li class="categories-cards__card">
+          <a href="/hc/pt-br/categories/13819539135643-Integradores">
+            <img
+              alt="Integrador Icon"
+              src="{{asset 'category13819539135643.svg'}}"
+              class="categories-cards__image"
+            />
+            <h2>Integrador</h2>
+            <span>
+              {{#if signed_in}}
+              	Tire suas dúvidas sobre seus projetos e todo ecossistema Solfácil.
+              {{else}}
+              	Veja como se tornar um parceiro Solfácil, tire dúvidas sobre seus projetos e outros assuntos.
+              {{/if}}
+            </span>
+            
+          </a>
+        </li>
+      	<li class="categories-cards__card">
+          <a href="/hc/pt-br/categories/13819586922395-Clientes">
+            <img
+              alt="Integrador Icon"
+              src="{{asset 'category13819586922395.svg'}}"
+              class="categories-cards__image"
+            />
+            <h2>Clientes</h2>
+            <span>
+               {{#if signed_in}}
+                Auxilie seus clientes a resolverem suas demandas e dúvidas mais frequentes sobre financiamentos e pagamentos.
+              {{else}}
+                Aprenda como iniciar seu financiamento, tire dúvidas sobre pagamentos e outros assuntos.
+              {{/if}}
+            </span>
+          </a>
+        </li>
+    </ul>
   </div>
 </section>
 
-<div class="container">
-  <section class="section knowledge-base">
-    <h2 class="visibility-hidden">{{ t 'categories' }}</h2>
-    <section class="categories blocks">
-      <ul class="blocks-list">
-        {{#each categories}}
-          {{#if ../has_multiple_categories}}
-            <li class="blocks-item">
-              <a href='{{url}}' class="blocks-item-link">
-                <span class="blocks-item-title">{{name}}</span>
-                <span class="blocks-item-description">{{excerpt description}}</span>
-              </a>
-            </li>
-          {{else}}
-            {{#each sections}}
-              <li class="blocks-item">
-                <a href='{{url}}' class="blocks-item-link">
-                  <span class="blocks-item-title">
-                    {{name}}
-                  </span>
-                  <span class="blocks-item-description">{{excerpt description}}</span>
-                </a>
-              </li>
-            {{/each}}
-          {{/if}}
-        {{/each}}
-      </ul>
-      {{pagination}}
-    </section>
-
-    {{#if promoted_articles}}
-      <section class="articles">
-        <h2>{{t 'promoted_articles'}}</h2>
-        <ul class="article-list promoted-articles">
-          {{#each promoted_articles}}
-            <li class="promoted-articles-item">
-                <a href="{{url}}">
-                  {{title}}
-
-                  {{#if internal}}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" focusable="false" viewBox="0 0 16 16" class="icon-lock" title="{{t 'internal'}}">
-                      <rect width="12" height="9" x="2" y="7" fill="currentColor" rx="1" ry="1"/>
-                      <path fill="none" stroke="currentColor" d="M4.5 7.5V4a3.5 3.5 0 017 0v3.5"/>
-                    </svg>
-                  {{/if}}
-                </a>
-            </li>
-          {{/each}}
+<section class="promoted-articles__container" id="frequently-questions">
+  <div class="promoted-articles">
+    <h2 class="promoted-articles__title">Dúvidas frequentes</h2>
+    <ol class="promoted-articles__list">
+      {{#each (slice promoted_articles 0 6)}}
+        <li>
+          <a href="{{url}}">
+            <h3>{{title}}</h3>
+            <img src="{{asset 'arrow-right.svg'}}" alt="arrow right">
+          </a>
+        </li>
+      {{/each}}
+    </ol>
+  </div>
+</section>
+<div class="card-service-container">
+  <div class='container'>
+    {{#if signed_in}}
+      <div class='card-called light'>
+          <div class='card-called__title'>
+            <h2 class='light'>Ainda tem dúvidas?</h2>
+            <p class='gray'>Acesse sua conta em nossa central de ajuda e acompanhe seus chamados.</p>
+          </div>
+          <a class='card-called__button light' href='/requests/new'>
+            Abrir chamado
+          </a>
+      </div>
+    {{/if}}
+    <div class='card-service-channels shadow'>
+      <div class='card-service-channels__header'>
+        <p>Canais de Atendimento</p>
+        <a href='https://integrador.solfacil.com.br/'>
+        	<h2>Central do Integrador</h2>
+        </a>
+      </div>
+      <div class='card-service-channels__body'>
+        <ul>
+          <li>
+            <img src='{{asset "whatsapp.svg"}}' alt='Whatsapp call icon' />
+            <span>{{settings.partner_hub_wpp}}</span>
+          </li>
+          <li>
+            <img src='{{asset "phone-call.svg"}}' alt='Phone call icon' />
+            <span>{{settings.partner_hub_phone}}</span>
+          </li>
+          <li>
+            <img src='{{asset "calendar.svg"}}' alt='Calendar icon' />
+            <span>{{settings.partner_hub_attendance}}</span>
+          </li>
         </ul>
-      </section>
-    {{/if}}
-  </section>
+      </div>
+    </div>
+  </div>
 
-  {{#if help_center.community_enabled}}
-    <section class="section home-section community">
-      <h2>{{t 'community'}}</h2>
-      {{#link 'community' class='community-link'}}
-        {{t 'join_conversation'}}
-      {{/link}}
 
-      <div class="community-image"></div>
-    </section>
-  {{/if}}
-
-  <section class="section home-section activity">
-    {{#if settings.show_recent_activity}}
-      {{recent_activity}}
-    {{/if}}
-  </section>
+<div class='card-service-channels shadow-footer'>
+  <div class="container">
+    <div class="container-card">
+      <div class='card-service-channels__header'>
+        <p>Canais de Atendimento</p>
+        <h2>Central do Cliente</h2>
+      </div>
+      <div class='card-service-channels__body'>
+        <ul>
+           <li>
+            <img src='{{asset "whatsapp.svg"}}' alt='Whatsapp call icon' />
+            <span>{{settings.customer_1_wpp}}</span>
+          </li>
+          <li>
+            <img src='{{asset "phone-call.svg"}}' alt='Phoe call icon' />
+            <span>{{settings.customer_1_phone}}</span>
+          </li>
+          <li>
+            <img src='{{asset "calendar.svg"}}' alt='Calendar icon' />
+            <span>{{settings.customer_1_attendance}}</span>
+          </li>
+        </ul>
+        <h3>SAC</h3>
+        <ul>
+          <li>
+            <img src='{{asset "phone-call.svg"}}' alt='Phoe call icon' />
+            <span>{{settings.customer_3_phone}}</span>
+          </li>
+          <li>
+            <img src='{{asset "calendar.svg"}}' alt='Calendar icon' />
+            <span>{{settings.customer_3_attendance}}</span>
+          </li>
+        </ul>        
+        <h3>Ouvidoria</h3>
+        <ul>
+          <li>
+            <img src='{{asset "email.svg"}}' alt='email icon' />
+            <a href="mailto:{{settings.customer_2_email}}">{{settings.customer_2_email}}</a>
+          </li>
+          <li>
+            <img src='{{asset "phone-call.svg"}}' alt='Phoe call icon' />
+            <span>{{settings.customer_2_phone}}</span>
+          </li>
+          <li>
+            <img src='{{asset "calendar.svg"}}' alt='Calendar icon' />
+            <span>{{settings.customer_2_attendance}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
