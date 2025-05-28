@@ -12,7 +12,7 @@ jobs:
   commitlint:
     name: Lint commit messages
     if: ${{ github.event_name == 'pull_request' }}
-    runs-on: ubuntu-latest
+    runs-on: shd-eks-runners
     steps:
       - name: Checkout
         uses: zendesk/checkout@v3
@@ -26,10 +26,11 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Lint all commit messages
-        run: yarn commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }}
+        run: yarn commitlint --from ${{ github.event.pull_request.base.sha }} --to
+          ${{ github.event.pull_request.head.sha }}
   lint:
     name: Lint JS files
-    runs-on: ubuntu-latest
+    runs-on: shd-eks-runners
     steps:
       - name: Checkout
         uses: zendesk/checkout@v3
@@ -45,7 +46,7 @@ jobs:
         run: yarn eslint
   test:
     name: Test
-    runs-on: ubuntu-latest
+    runs-on: shd-eks-runners
     steps:
       - name: Checkout
         uses: zendesk/checkout@v3
@@ -61,7 +62,7 @@ jobs:
         run: yarn test
   build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: shd-eks-runners
     steps:
       - name: Checkout
         uses: zendesk/checkout@v3
